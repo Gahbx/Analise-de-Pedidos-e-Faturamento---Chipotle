@@ -26,8 +26,13 @@ MediaDeValorPorPedido = df.groupby('order_id')['item_price'].sum().mean()
 
 # tarefa 8 Crie um novo DataFrame que contenha apenas os pedidos que custaram mais de $20.
 
-AcimaDe20_df = df.groupby('order_id',)['item_price'].sum()
+# 1. Agrupa e soma (Gera uma Series)
+AcimaDe20 = df.groupby('order_id')['item_price'].sum()
 
-AcimaDe20_df = AcimaDe20_df[AcimaDe20_df > 20]
+# 2. Filtra (Continua sendo uma Series)
+AcimaDe20 = AcimaDe20[AcimaDe20 > 20]
+
+# 3. Converte a Series de volta para um DataFrame
+AcimaDe20_df = AcimaDe20.reset_index()
 
 print(AcimaDe20_df)
